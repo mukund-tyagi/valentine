@@ -1,183 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Will You Be My Valentine? ❤️</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Will You Be My Valentine? ❤️</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 
-    body {
-      height: 100vh;
-      background: linear-gradient(135deg, #ff4e8a, #ff85b3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      color: white;
-    }
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #ff4e8a, #ff85b3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: white;
+}
 
-    .card {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(12px);
-      padding: 40px 50px;
-      border-radius: 25px;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-      max-width: 420px;
-      z-index: 2;
-    }
+/* IMPORTANT: positioning context */
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  padding: 40px 50px 80px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  width: 420px;
+}
 
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-    }
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
 
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-      opacity: 0.9;
-    }
+p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
-    }
+.buttons {
+  position: relative;
+  height: 80px;
+}
 
-    button {
-      padding: 12px 28px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.2s ease;
-      user-select: none;
-    }
+button {
+  padding: 12px 28px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  user-select: none;
+}
 
-    #yes {
-      background: white;
-      color: #ff4e8a;
-      font-weight: 600;
-    }
+#yes {
+  background: white;
+  color: #ff4e8a;
+  font-weight: 600;
+}
 
-    #yes:hover {
-      transform: scale(1.1);
-      background: #ffe6ef;
-    }
+#yes:hover {
+  transform: scale(1.1);
+  background: #ffe6ef;
+}
 
-    /* The forbidden button */
-    #no {
-      background: rgba(255,255,255,0.3);
-      color: white;
-      position: fixed;
-      left: 50%;
-      top: 60%;
-      transform: translate(-50%, -50%);
-    }
+/* The trapped button */
+#no {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.3);
+  color: white;
+  transition: left 0.35s ease, top 0.35s ease;
+}
 
-    .result {
-      display: none;
-      margin-top: 25px;
-      font-size: 1.6rem;
-      font-weight: 600;
-    }
+.result {
+  display: none;
+  margin-top: 25px;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
 
-    /* Floating hearts */
-    .heart {
-      position: absolute;
-      bottom: -20px;
-      font-size: 20px;
-      animation: floatUp 6s linear infinite;
-      opacity: 0.8;
-    }
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.8;
+}
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) scale(1.6);
-        opacity: 0;
-      }
-    }
-  </style>
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-100vh) scale(1.6); opacity: 0; }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="card">
-    <h1>Hey ❤️</h1>
-    <p>I was wondering something very important…</p>
-    <h1>Will you be my Valentine?</h1>
+<div class="card" id="card">
+  <h1>Hey ❤️</h1>
+  <p>I was wondering something very important…</p>
+  <h1>Will you be my Valentine?</h1>
 
-    <div class="buttons">
-      <button id="yes">Yes 💕</button>
-      <button id="no">No 🙃</button>
-    </div>
-
-    <div class="result" id="result">
-      Yayyy!! 💖<br>
-      You just made my day 🌹
-    </div>
+  <div class="buttons">
+    <button id="yes">Yes 💕</button>
+    <button id="no">No 🙃</button>
   </div>
 
-  <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const result = document.getElementById("result");
+  <div class="result" id="result">
+    Yayyy!! 💖<br>You just made my day 🌹
+now we fucky fucky
+  </div>
+</div>
 
-    function teleportButton() {
-      const padding = 20;
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const card = document.getElementById("card");
+const result = document.getElementById("result");
 
-      const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-      const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+let movedOnce = false;
+let lastMove = 0;
 
-      const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
+function moveNoButton() {
+  const now = Date.now();
+  if (now - lastMove < 350) return;
+  lastMove = now;
 
-      noBtn.style.left = randomX + "px";
-      noBtn.style.top = randomY + "px";
-    }
+  if (!movedOnce) {
+    noBtn.style.transform = "none";
+    movedOnce = true;
+  }
 
-    // Desktop
-    noBtn.addEventListener("mouseenter", teleportButton);
+  const padding = 10;
+  const maxX = card.clientWidth - noBtn.offsetWidth - padding;
+  const maxY = card.clientHeight - noBtn.offsetHeight - padding;
 
-    // Mobile
-    noBtn.addEventListener("touchstart", teleportButton);
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
 
-    // Just in case someone is too fast
-    noBtn.addEventListener("click", teleportButton);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
 
-    yesBtn.addEventListener("click", () => {
-      result.style.display = "block";
-      yesBtn.style.display = "none";
-      noBtn.style.display = "none";
-    });
+noBtn.addEventListener("mouseover", () => {
+  setTimeout(moveNoButton, 120);
+});
 
-    // Floating hearts generator
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.textContent = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = Math.random() * 3 + 4 + "s";
-      document.body.appendChild(heart);
+noBtn.addEventListener("touchstart", moveNoButton);
+noBtn.addEventListener("click", moveNoButton);
 
-      setTimeout(() => heart.remove(), 7000);
-    }, 300);
-  </script>
+yesBtn.addEventListener("click", () => {
+  result.style.display = "block";
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+});
+
+// Hearts
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 7000);
+}, 300);
+</script>
 
 </body>
 </html>
